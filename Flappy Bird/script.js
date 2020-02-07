@@ -1,7 +1,9 @@
 var bird;
 var gravity = 0.3;
 var gameOver = false;
-var pillar;
+var pillars;
+var distance = 0;
+
 
 function setup() {
   createCanvas(800, 600);
@@ -10,7 +12,12 @@ function setup() {
   stroke(205,133,63);
   rect(0, 550, 800, 50);
   bird = new Bird();
-  pillar = new PillarPair();
+  pillarList = [];
+  for(var i=0; i<100; i++){
+  	distance += 250;
+  	pillars = new PillarPair(500+distance);
+  	pillarList.push(pillars);
+  }
 }
 
 function draw() {
@@ -23,8 +30,12 @@ function draw() {
 	  	bird.draw();
 	  	gameOver = bird.isGameOver();
 
-	  	pillar.draw();
-
+	  	for(var j=0; j<pillarList.length; j++){
+	  		pillarList[j].draw();
+	  		pillarList[j].move();
+	  		pillarList[j].checkCollision();
+	  	}
+	  
 	  	if(gameOver){
 	  		console.log("Game Over!")
 	  		noLoop();
@@ -72,15 +83,28 @@ class Bird{
 }
 
 class PillarPair{
-	constructor(){
+	constructor(init_location){
 		this.length = Math.random()*150 + 100;
-		this.length2 = Math.random()*200 + 350;
+		this.length2 = Math.random()*150 + 350;
+		this.x = init_location;
 	}
+
 	draw(){
 		fill(0,128,0);
 		noStroke();
-		rect(500,0,50,this.length);
-		rect(500,this.length2,50,600-this.length2);
+		rect(this.x,0,60,this.length);
+		rect(this.x,this.length2,60,600-this.length2);
+	}
 
+	move(){
+		this.x -= 5;
+	}
+
+	checkCollision(){
+		if(bird.y-20 <= this.length && this.x <= 125 && this.x >= 50){
+			gameOver = true;
+		} else if(bird.y >= this.length2-20 && this.x <= 125 && this.x >= 50){
+			gameOver = true;
+		}
 	}
 }
