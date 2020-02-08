@@ -13,7 +13,7 @@ function setup() {
   rect(0, 550, 800, 50);
   bird = new Bird();
   pillarList = [];
-  for(var i=0; i<100; i++){
+  for(var i=0; i<10; i++){
   	distance += 250;
   	pillars = new PillarPair(500+distance);
   	pillarList.push(pillars);
@@ -30,16 +30,30 @@ function draw() {
 	  	bird.draw();
 	  	gameOver = bird.isGameOver();
 
+	  
+	  	
+	  
+
 	  	for(var j=0; j<pillarList.length; j++){
 	  		pillarList[j].draw();
 	  		pillarList[j].move();
 	  		pillarList[j].checkCollision();
+	  		if(pillarList[j].x < -100){
+	  			pillarList.splice(0,1);
+	  			pillars = new PillarPair(2150 + 250);
+	  			pillarList.push(pillars);	
+	  			pillarList[j].draw();
+	  			pillarList[j].move();
+	  			pillarList[j].checkCollision();  		
+	  		}
 	  	}
 	  
 	  	if(gameOver){
 	  		console.log("Game Over!")
 	  		noLoop();
 	  	}
+
+	  	console.log(pillarList.length);
 }
 
 function keyPressed(){
@@ -84,8 +98,8 @@ class Bird{
 
 class PillarPair{
 	constructor(init_location){
-		this.length = Math.random()*150 + 100;
-		this.length2 = Math.random()*150 + 350;
+		this.length = Math.random()*175 + 100;
+		this.length2 = Math.random()*175 + 350;
 		this.x = init_location;
 	}
 
@@ -97,7 +111,7 @@ class PillarPair{
 	}
 
 	move(){
-		this.x -= 5;
+		this.x -= 5.5;
 	}
 
 	checkCollision(){
