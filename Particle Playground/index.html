@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Particle Playground</title>
+</head>
+<div class="mous"></div>
+<div class="inputs">
+<div id="input1">
+max size: <input class="moveable" type="range" min="1" max="100" id="size" value="10">
+<input class="button1" type="button" onclick="buttonClick()" value="Submit"><br><br>
+</div>
+<div>
+speed: <input class="moveable" type="range" step="0.1" min="0" max="3" id="speed" value="1" >
+<input class="button1" type="button" onclick="buttonClick4()" value="Submit"><br><br>
+</div>
+<div>
+number of elements: <input class="moveable" type="range" min="0" max="10000" id="nr" value="0">
+<input class="button1" type="button" onclick="buttonClick2()" value="Submit">
+<small id="num">0</small><br><br>
+</div>
+<div>
+colors: <input type="Color" name="col" id="col" value="#B04AFF"><input type="Color" id="col2" value="#7343E8"> <input type="Color" id="col3" value="#5A57FF"><input type="Color" id="col4" value="#436CE8"> <input type="Color" id="col5" value="#4AA6FF">
+<input class="button1" type="button" onclick="buttonClick3()" value="Submit"><br><br>
+</div>
+<div id="canvas">
+<canvas width="500px" height="500px" style="border: 1px solid white;"></canvas>
+</div>
+<p>Hold the Space Bar for an effect and click in the field to create a new Ball.</p>
+</div>
+<script type="text/javascript" src="script.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style.css"></link>
+</body>
+</html>
